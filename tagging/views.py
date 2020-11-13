@@ -22,7 +22,7 @@ class IndexView(TemplateView):
 
 class CreateTagView(LoginRequiredMixin, FormView):
     form_class = TagForm
-    template_name = "create_tag.html"
+    template_name = "tags/create.html"
     success_url = "/"
 
     def form_valid(self, form):
