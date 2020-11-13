@@ -20,7 +20,7 @@ class IndexView(TemplateView):
         return super().get(request, *args, **kwargs)
 
 
-class CreateTagView(LoginRequiredMixin, FormView):
+class CreateView(LoginRequiredMixin, FormView):
     form_class = TagForm
     template_name = "tags/create.html"
     success_url = "/"
@@ -49,7 +49,7 @@ class CreateTagView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
 
-class TagListView(LoginRequiredMixin, ListView):
+class ListView(LoginRequiredMixin, ListView):
     template_name = "tags/list.html"
 
     def get_queryset(self):
