@@ -1,9 +1,9 @@
 from django.urls import path
 
-from tagging import views
+from tagging.views import tag
 
 urlpatterns = [
-    path("", views.IndexView.as_view(), name="index"),
-    path("tags/create/", views.CreateTagView.as_view()),
-    path("tags/", views.TagListView.as_view()),
+    path("", tag.IndexView.as_view(), name="index"),
+    path("tags/create/", tag.CreateTagView.as_view()),
+    path("tags/", tag.TagListView.as_view()),
 ]
