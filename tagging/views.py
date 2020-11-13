@@ -1,5 +1,12 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
+from django.views.generic.edit import ModelFormMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from allauth.socialaccount.models import SocialAccount, SocialToken
+
+from tagging.models import Tag
+from tagging.forms import TagForm
+from tagging.twitter_api import Twitter
 
 # Create your views here.
 
@@ -11,3 +18,32 @@ class IndexView(TemplateView):
         if not request.user.is_authenticated:
             return render(request, "about.html")
         return super().get(request, *args, **kwargs)
+
+
+class CreateTagView(LoginRequiredMixin, FormView):
+    form_class = TagForm
+    template_name = "create_tag.html"
+    success_url = "/"
+
+    def form_valid(self, form):
+        social_token: SocialToken = SocialToken.objects.get(
+            account__user=self.request.user.id
+        )
+
+        api = Twitter(
+            social_token.app.client_id,
+            social_token.app.secret,
+            social_token.token,
+            social_token.token_secret,
+        )
+        tag = api.create_list(
+            form.cleaned_data["name"],
+            form.cleaned_data["description"],
+            form.cleaned_data["is_private"],
+        )
+
+        Tag(
+            list_id=tag.id, account=social_token.account, name=form.cleaned_data["name"]
+        ).save()
+
+        return super().form_valid(form)

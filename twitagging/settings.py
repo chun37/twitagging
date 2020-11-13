@@ -123,8 +123,11 @@ STATIC_URL = "/static/"
 # sites
 SITE_ID = 1
 
-# all-auth
+# auth
+LOGIN_URL = "twitter_login"
 LOGIN_REDIRECT_URL = "index"
+
+# all-auth
 ACCOUNT_LOGOUT_REDIRECT_URL = "index"
 ACCOUNT_LOGOUT_ON_GET = True
 
