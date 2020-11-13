@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from allauth.account.views import LogoutView
 
 urlpatterns = [
     path("", include("tagging.urls")),
     path("admin/", admin.site.urls),
-    path("accounts/", include("allauth.urls")),
+    path("", include("allauth.socialaccount.providers.twitter.urls")),
+    path("twitter/logout/", LogoutView.as_view(), name="twitter_logout"),
 ]
