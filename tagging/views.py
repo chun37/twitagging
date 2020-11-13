@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, ListView
 from django.views.generic.edit import ModelFormMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from allauth.socialaccount.models import SocialAccount, SocialToken
@@ -47,3 +47,10 @@ class CreateTagView(LoginRequiredMixin, FormView):
         ).save()
 
         return super().form_valid(form)
+
+
+class TagListView(LoginRequiredMixin, ListView):
+    template_name = "tags/list.html"
+
+    def get_queryset(self):
+        return Tag.objects.filter(account__user=self.request.user.id)
