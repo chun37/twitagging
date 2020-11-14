@@ -11,16 +11,7 @@ from tagging.twitter_api import Twitter
 # Create your views here.
 
 
-class IndexView(TemplateView):
-    template_name = "index.html"
-
-    def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return render(request, "about.html")
-        return super().get(request, *args, **kwargs)
-
-
-class CreateView(LoginRequiredMixin, FormView):
+class Create(LoginRequiredMixin, FormView):
     form_class = TagForm
     template_name = "tags/create.html"
     success_url = "/"
@@ -49,7 +40,7 @@ class CreateView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
 
-class ListView(LoginRequiredMixin, ListView):
+class List(LoginRequiredMixin, ListView):
     template_name = "tags/list.html"
 
     def get_queryset(self):
