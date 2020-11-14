@@ -1,8 +1,6 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView, FormView, ListView
-from django.views.generic.edit import ModelFormMixin
+from django.views.generic import FormView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from allauth.socialaccount.models import SocialAccount, SocialToken
+from allauth.socialaccount.models import SocialToken
 
 from tagging.models import Tag
 from tagging.forms import TagForm
