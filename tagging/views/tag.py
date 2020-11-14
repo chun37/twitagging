@@ -1,9 +1,11 @@
-from django.views.generic import FormView, ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from allauth.socialaccount.models import SocialToken
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.query import QuerySet
+from django.http.response import HttpResponseRedirect
+from django.views.generic import FormView, ListView
 
-from tagging.models import Tag
 from tagging.forms import TagForm
+from tagging.models import Tag
 from tagging.twitter_api import Twitter
 
 # Create your views here.
@@ -14,7 +16,7 @@ class Create(LoginRequiredMixin, FormView):
     template_name = "tags/create.html"
     success_url = "/"
 
-    def form_valid(self, form):
+    def form_valid(self, form: TagForm) -> HttpResponseRedirect:
         social_token: SocialToken = SocialToken.objects.get(
             account__user=self.request.user.id
         )
@@ -41,5 +43,5 @@ class Create(LoginRequiredMixin, FormView):
 class List(LoginRequiredMixin, ListView):
     template_name = "tags/list.html"
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         return Tag.objects.filter(account__user=self.request.user.id)

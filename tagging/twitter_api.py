@@ -1,4 +1,4 @@
-from tweepy import OAuthHandler, API
+from tweepy import API, OAuthHandler
 from tweepy.models import List
 
 
