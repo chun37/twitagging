@@ -13,7 +13,7 @@ from twitter_wrapper import TwitterAPI
 class LoginView(View):
     def get(self, request, *args, **kwargs):
 
-        oauth_callback = "http://127.0.0.1:8000/accounts/callback/"
+        oauth_callback = f"{request._current_scheme_host}/accounts/callback/"
 
         twitter = OAuth1Session(
             settings.TWITTER_API_KEY, settings.TWITTER_API_SECRET_KEY
