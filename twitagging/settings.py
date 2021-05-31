@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+from pymongo.mongo_client import MongoClient
+
 from secret import get_secret_text
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,7 +33,7 @@ SECRET_KEY = get_secret_text(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["twitagging.an.r.appspot.com"]
 
 
 # Application definition
@@ -80,14 +82,11 @@ WSGI_APPLICATION = "twitagging.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+DATABASES = {"default": {"ENGINE": "djongo", "NAME": "myFirstDatabase"}}
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
+MongoClient.HOST = get_secret_text(
+    os.environ["GOOGLE_CLOUD_PROJECT"], "mongodb-uri", "latest"
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
