@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.hashers import make_password
 
@@ -44,8 +43,8 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
 
-    def has_module_perms(self, app_label):
+    def has_module_perms(self, _):
         return self.is_admin
 
-    def has_perm(self, perm, obj=None):
+    def has_perm(self, *_):
         return self.is_admin
