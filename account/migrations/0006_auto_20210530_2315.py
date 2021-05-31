@@ -6,26 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('account', '0005_alter_user_id'),
+        ("account", "0005_alter_user_id"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='user',
-            name='display_name',
+            model_name="user",
+            name="display_name",
         ),
         migrations.RemoveField(
-            model_name='user',
-            name='screen_name',
+            model_name="user",
+            name="screen_name",
         ),
         migrations.AddField(
-            model_name='twitter',
-            name='display_name',
-            field=models.CharField(default='', max_length=255),
+            model_name="twitter",
+            name="display_name",
+            field=models.CharField(default="", max_length=255),
         ),
         migrations.AddField(
-            model_name='twitter',
-            name='screen_name',
-            field=models.CharField(default='', max_length=255),
+            model_name="twitter",
+            name="screen_name",
+            field=models.CharField(default="", max_length=255),
         ),
     ]

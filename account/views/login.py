@@ -1,7 +1,7 @@
 from urllib.parse import parse_qsl
 
 from django.conf import settings
-from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth import authenticate, get_user_model, login
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, View
 from requests_oauthlib import OAuth1Session

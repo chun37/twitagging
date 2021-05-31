@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from tweepy import API, OAuthHandler, models
 import typedjson
+from tweepy import API, OAuthHandler, models
 
 
 @dataclass(frozen=True)

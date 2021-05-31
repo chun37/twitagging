@@ -6,24 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('account', '0001_initial'),
+        ("account", "0001_initial"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='user',
-            old_name='user_name',
-            new_name='display_name',
+            model_name="user",
+            old_name="user_name",
+            new_name="display_name",
         ),
         migrations.AddField(
-            model_name='user',
-            name='screen_name',
-            field=models.CharField(default='', max_length=255),
+            model_name="user",
+            name="screen_name",
+            field=models.CharField(default="", max_length=255),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='user',
-            name='id',
+            model_name="user",
+            name="id",
             field=models.IntegerField(primary_key=True, serialize=False),
         ),
     ]
