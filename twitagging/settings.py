@@ -145,3 +145,4 @@ TWITTER_API_SECRET_KEY = get_secret_text(
 
 # auth
 AUTHENTICATION_BACKENDS = ["account.backends.OAuthBackend"]
+LOGOUT_REDIRECT_URL = "/"

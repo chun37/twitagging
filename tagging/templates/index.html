@@ -1,6 +1,7 @@
 {% if user.is_authenticated %}
 <h1>Twitagging ログイン済</h1>
 <p>{{ user.twitter.display_name}}(@{{ user.twitter.screen_name}})</p>
+<a href="{% url 'accounts:logout' %}">ログアウト</a>
 {% else %}
 <h1>Twitaggingへ ようこそ</h1>
 {% endif %}
