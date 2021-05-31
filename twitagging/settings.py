@@ -142,3 +142,6 @@ TWITTER_API_KEY = get_secret_text(
 TWITTER_API_SECRET_KEY = get_secret_text(
     os.environ["GOOGLE_CLOUD_PROJECT"], "twitter_api_secret_key", "latest"
 )
+
+# auth
+AUTHENTICATION_BACKENDS = ["account.backends.OAuthBackend"]

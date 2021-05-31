@@ -1,7 +1,7 @@
 from urllib.parse import parse_qsl
 
 from django.conf import settings
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, View
 from requests_oauthlib import OAuth1Session
@@ -71,7 +71,9 @@ class CallbackView(TemplateView):
         )
 
         user_model = get_user_model()
-        user_model.objects.get_or_create(id=user_id, defaults={"twitter": twitter_obj})
+        user, _ = user_model.objects.get_or_create(
+            id=user_id, defaults={"twitter": twitter_obj}
+        )
 
         profile, json = TwitterAPI(
             settings.TWITTER_API_KEY,
@@ -84,4 +86,6 @@ class CallbackView(TemplateView):
         twitter_obj.display_name = profile.name
         twitter_obj.save()
 
-        return render(request, "login.html")
+        user = authenticate(request, user=user)
+        login(request, user)
+        return redirect("tagging:index")

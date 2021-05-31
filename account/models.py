@@ -48,3 +48,6 @@ class User(AbstractBaseUser):
 
     def has_perm(self, *_):
         return self.is_admin
+
+    def __str__(self):
+        return str(self.id)
